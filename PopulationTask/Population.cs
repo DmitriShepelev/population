@@ -30,7 +30,7 @@ namespace PopulationTask
             }
             else if (percent < 0 || percent > 100)
             {
-                throw new ArgumentOutOfRangeException("Value of percents cannot be less then 0% or more then 100%.");
+                throw new ArgumentOutOfRangeException($"Value of {nameof(percent)} cannot be less then 0% or more then 100%.");
             }
             else if (visitors < 0)
             {
@@ -44,18 +44,16 @@ namespace PopulationTask
             {
                 throw new ArgumentException("Current population cannot be less than initial population.");
             }
-            else
-            {
-                var countOfYears = 0;
-                while (initialPopulation < currentPopulation)
-                {
-                    initialPopulation += Convert.ToInt32(initialPopulation / 100 * percent);
-                    initialPopulation += visitors;
-                    countOfYears++;
-                }
 
-                return countOfYears;
+            var countOfYears = 0;
+            while (initialPopulation < currentPopulation)
+            {
+                initialPopulation += (int)(initialPopulation / 100 * percent);
+                initialPopulation += visitors;
+                countOfYears++;
             }
+
+            return countOfYears;
         }
     }
 }
